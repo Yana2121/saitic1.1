@@ -18,7 +18,7 @@
 <!-- навигация -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <a class="navbar-brand" href="#">Мой сайт</a>
+        <a class="navbar-brand" href="{{ url_for('index') }}">Мои Сайтик</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarNav" aria-controls="navbarNav"
                 aria-expanded="false" aria-label="Toggle navigation">
@@ -28,15 +28,35 @@
              id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Записи</a>
+                    <a class="nav-link" href="{{ url_for('profile') }}">Профиль</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Календарь</a>
+                    <a class="nav-link" href="#">Пользователи</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
-
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-dismissible alert-info col-5"
+                         role="alert"
+                         id="alert">
+                        <strong>{{ message }}</strong>
+                        <button type="button"
+                                class="btn-close"
+                                data-bs-dismiss="alert"
+                                aria-label="Close"></button>
+                    </div>
+      {% endfor %}
+  {% endif %}
+{% endwith %}
+<!-- контент дочерних шаблонов -->
+<div class="container my-3">
+    {% block content %}
+    {% endblock %}
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
